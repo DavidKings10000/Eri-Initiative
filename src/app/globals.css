@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+body {
+  @apply bg-[#F7F4EC] text-slate-800 antialiased;
+}
+
+::selection {
+  @apply bg-[#6B7A3A] text-white;
+}
