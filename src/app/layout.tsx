@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     description:
       'Community-led support for street-connected individuals in Kenya through rehabilitation and reintegration.',
     type: 'website',
-    url: 'https://erikenya.org',
+    url: 'https://eristreetinitiative.org',
   },
 };
 
