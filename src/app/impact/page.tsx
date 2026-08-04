@@ -1,3 +1,8 @@
+"use client";
+
+import { useLanguage } from '@/context/LanguageProvider';
+import { useEffect, useState } from 'react';
+
 async function getImpactData() {
   try {
     const response = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/api/impact`, { cache: 'no-store' });
@@ -18,26 +23,32 @@ const stories = [
   },
 ];
 
-export default async function ImpactPage() {
-  const metrics = await getImpactData();
+export default function ImpactPage() {
+  const { t } = useLanguage();
+  const [metrics, setMetrics] = useState<{ key_name: string; value: string; description: string }[]>([]);
+
+  useEffect(() => {
+    getImpactData().then((data) => setMetrics(data));
+  }, []);
+
   const stats = metrics.length
     ? metrics.map((item: { key_name: string; value: string; description: string }) => ({
         label: item.description,
         value: item.value,
       }))
     : [
-        { label: 'People assisted', value: '1,240+' },
-        { label: 'Identity documents supported', value: '612' },
-        { label: 'Referral partners', value: '18' },
-        { label: 'Community volunteers', value: '94' },
+        { label: t('people_supported'), value: '1,240+' },
+        { label: t('identity_documents_supported'), value: '612' },
+        { label: t('referral_partners'), value: '18' },
+        { label: t('community_volunteers'), value: '94' },
       ];
 
   return (
     <main className="mx-auto max-w-7xl px-6 py-16 lg:px-8">
       <section className="max-w-3xl">
-        <p className="text-sm font-semibold uppercase tracking-[0.25em] text-olive">Impact & stories</p>
-        <h1 className="mt-3 text-4xl font-semibold tracking-tight text-navy">Publicly shared progress, grounded in consent and respect.</h1>
-        <p className="mt-5 text-lg leading-8 text-slate-700">We share aggregate impact data and anonymized stories that reflect the dignity and progress of the people we serve.</p>
+        <p className="text-sm font-semibold uppercase tracking-[0.25em] text-olive">{t('impact')}</p>
+        <h1 className="mt-3 text-4xl font-semibold tracking-tight text-navy">{t('impact_title')}</h1>
+        <p className="mt-5 text-lg leading-8 text-slate-700">{t('impact_description')}</p>
       </section>
 
       <section className="mt-10 grid gap-4 md:grid-cols-4">

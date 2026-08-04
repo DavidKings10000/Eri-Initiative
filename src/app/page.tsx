@@ -1,11 +1,8 @@
+"use client";
+
 import Link from 'next/link';
 import { ArrowRight, Heart, Handshake, ShieldCheck, Users } from 'lucide-react';
-
-const stats = [
-  { label: 'People supported', value: '1,240+' },
-  { label: 'Rehabilitation stages', value: '5' },
-  { label: 'Community partners', value: '18' },
-];
+import { useLanguage } from '@/context/LanguageProvider';
 
 const values = [
   {
@@ -26,33 +23,45 @@ const values = [
 ];
 
 export default function HomePage() {
+  const { t } = useLanguage();
+  const stats = [
+    { label: t('people_supported'), value: '1,240+' },
+    { label: t('rehabilitation_stages'), value: '5' },
+    { label: t('community_partners'), value: '18' },
+  ];
+
   return (
     <main className="min-h-screen bg-cream text-slate-800">
       <section className="mx-auto flex max-w-7xl flex-col gap-10 px-6 py-16 lg:flex-row lg:items-center lg:px-8">
         <div className="max-w-2xl space-y-8">
           <div className="inline-flex items-center rounded-full border border-navy/10 bg-white px-4 py-2 text-sm font-medium text-navy">
             <Heart className="mr-2 h-4 w-4 text-olive" />
-            Community-led rehabilitation for street-connected persons
+            {t('hero_tagline')}
           </div>
           <div className="space-y-4">
             <h1 className="text-4xl font-semibold tracking-tight text-navy sm:text-5xl">
-              Restoring dignity and opening pathways home.
+              {t('mission_heading')}
             </h1>
             <p className="text-lg leading-8 text-slate-700">
-              ERI Street Initiative works alongside families, government agencies, and local partners to support street-connected individuals with identity, care, education, protection, and livelihoods.
+              {t('page_intro')}
             </p>
           </div>
           <div className="flex flex-wrap gap-4">
             <Link href="/get-involved" className="rounded-full bg-navy px-6 py-3 font-semibold text-white transition hover:bg-navy/90">
-              Donate now
+              {t('donate_now')}
             </Link>
             <Link href="/get-involved" className="rounded-full border border-navy/20 bg-white px-6 py-3 font-semibold text-navy transition hover:border-olive hover:text-olive">
-              Volunteer
+              {t('volunteer')}
             </Link>
           </div>
         </div>
         <div className="w-full max-w-xl rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
-          <div className="grid gap-6 sm:grid-cols-3">
+          <img
+            src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1200&q=80"
+            alt="Community support"
+            className="h-64 w-full rounded-3xl object-cover"
+          />
+          <div className="mt-6 grid gap-6 sm:grid-cols-3">
             {stats.map((stat) => (
               <div key={stat.label} className="rounded-2xl bg-cream p-4 text-center">
                 <div className="text-2xl font-semibold text-navy">{stat.value}</div>
@@ -61,8 +70,8 @@ export default function HomePage() {
             ))}
           </div>
           <div className="mt-8 rounded-2xl bg-navy p-6 text-white">
-            <p className="text-sm uppercase tracking-[0.25em] text-olive">Our approach</p>
-            <p className="mt-3 text-xl font-semibold">A five-stage pathway from crisis response to lasting reintegration.</p>
+            <p className="text-sm uppercase tracking-[0.25em] text-olive">{t('our_approach_heading')}</p>
+            <p className="mt-3 text-xl font-semibold">{t('programs_description')}</p>
             <Link href="/programs" className="mt-5 inline-flex items-center text-sm font-semibold text-cream">
               Explore the model <ArrowRight className="ml-2 h-4 w-4" />
             </Link>

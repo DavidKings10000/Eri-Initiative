@@ -1,3 +1,7 @@
+"use client";
+
+import { useLanguage } from '@/context/LanguageProvider';
+
 const stages = [
   {
     title: 'Helping Hand',
@@ -22,12 +26,14 @@ const stages = [
 ];
 
 export default function ProgramsPage() {
+  const { t } = useLanguage();
+
   return (
     <main className="mx-auto max-w-7xl px-6 py-16 lg:px-8">
       <section className="max-w-3xl">
-        <p className="text-sm font-semibold uppercase tracking-[0.25em] text-olive">Programs</p>
-        <h1 className="mt-3 text-4xl font-semibold tracking-tight text-navy">A five-stage rehabilitation pathway built for dignity and long-term stability.</h1>
-        <p className="mt-5 text-lg leading-8 text-slate-700">Each step is designed to be humane, practical, and tailored to the needs of the person we are supporting. Our public-facing model is transparent and anchored in community care.</p>
+        <p className="text-sm font-semibold uppercase tracking-[0.25em] text-olive">{t('programs')}</p>
+        <h1 className="mt-3 text-4xl font-semibold tracking-tight text-navy">{t('programs_title')}</h1>
+        <p className="mt-5 text-lg leading-8 text-slate-700">{t('programs_description')}</p>
       </section>
 
       <section className="mt-12 grid gap-6 lg:grid-cols-2">

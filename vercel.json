@@ -3,6 +3,6 @@
   "builds": [{ "src": "package.json", "use": "@vercel/next" }],
   "env": {
     "NEXT_PUBLIC_SITE_URL": "https://eristreetinitiative.org",
-    "NEXT_PUBLIC_PORTAL_URL": "https://portal.erikenya.org"
+    "NEXT_PUBLIC_PORTAL_URL": "https://portal.eristreetinitiative.org"
   }
 }

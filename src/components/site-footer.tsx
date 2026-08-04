@@ -8,7 +8,7 @@ export function SiteFooter() {
         <div className="flex gap-4">
           <Link href="/about" className="hover:text-olive">About</Link>
           <Link href="/contact" className="hover:text-olive">Contact</Link>
-          <a href={process.env.NEXT_PUBLIC_PORTAL_URL || 'https://portal.erikenya.org'} className="hover:text-olive">Staff login</a>
+         
         </div>
       </div>
     </footer>

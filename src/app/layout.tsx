@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import { Inter } from 'next/font/google';
-import Template from './template';
+import Shell from '@/components/shell';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     description:
       'Community-led support for street-connected individuals in Kenya through rehabilitation and reintegration.',
     type: 'website',
-    url: 'https://eristreetinitiative.org',
+    url: 'https://erikenya.org',
   },
 };
 
@@ -23,7 +23,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Template>{children}</Template>
+        <Shell>{children}</Shell>
       </body>
     </html>
   );

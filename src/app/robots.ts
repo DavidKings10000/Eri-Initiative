@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: '*',
       allow: '/',
     },
-    sitemap: 'https://eristreetinitiative.org/sitemap.xml',
+    sitemap: 'https://erikenya.org/sitemap.xml',
   };
 }
