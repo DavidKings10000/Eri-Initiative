@@ -10,6 +10,10 @@ export const metadata: Metadata = {
   description:
     'ERI Street Initiative restores dignity and transforms the lives of street-connected individuals through legal identity, healthcare, education, protection, and livelihoods.',
   keywords: ['ERI', 'street-connected', 'Kenya', 'rehabilitation', 'social protection'],
+  icons: {
+    icon: '/Logo.png',
+    shortcut: '/Logo.png',
+  },
   openGraph: {
     title: 'ERI Street Initiative',
     description:

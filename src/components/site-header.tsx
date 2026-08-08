@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useMemo, useState } from 'react';
+import React, { useMemo, useRef, useState } from 'react';
 import Link from "next/link";
-import { Globe2, Home, Info, Layers, HeartHandshake, Users, Newspaper, Mail, Search, LogIn, Menu, X } from "lucide-react";
-import { useLanguage } from "@/context/LanguageProvider";
+import { Home, Info, Layers, HeartHandshake, Users, Newspaper, Mail, Search, Menu, X, CalendarDays } from "lucide-react";
+import { translations, useLanguage } from "@/context/LanguageProvider";
 
 const navItems = [
   { href: '/', key: 'home', icon: Home },
@@ -11,8 +11,8 @@ const navItems = [
   { href: '/programs', key: 'programs', icon: Layers },
   { href: '/impact', key: 'impact', icon: HeartHandshake },
   { href: '/get-involved', key: 'get_involved', icon: Users },
-  { href: '/partners', key: 'partners', icon: Globe2 },
   { href: '/news', key: 'news', icon: Newspaper },
+  { href: '/events', key: 'events', icon: CalendarDays },
   { href: '/contact', key: 'contact', icon: Mail },
 ];
 
@@ -35,13 +35,25 @@ export function SiteHeader({ collapsed, onToggleSidebar }: SiteHeaderProps) {
 
   const filteredNavItems = useMemo(() => {
     const normalized = search.toLowerCase().trim();
-    return normalized
-      ? navItems.filter((item) => t(item.key).toLowerCase().includes(normalized))
-      : navItems;
+    if (!normalized) return navItems;
+
+    return navItems.filter((item) => {
+      const translatedValues = Object.values(translations).map((locale) => locale[item.key]?.toLowerCase() ?? '');
+      const searchTerms = [
+        t(item.key).toLowerCase(),
+        item.href.toLowerCase(),
+        item.key.toLowerCase().replace(/_/g, ' '),
+        ...translatedValues,
+      ];
+
+      return searchTerms.some((value) => value.includes(normalized));
+    });
   }, [search, t]);
 
+  const searchInputRef = useRef<HTMLInputElement>(null);
+
   return (
-    <div role="complementary" className={`relative h-screen transform bg-white/95 transition-[width] duration-200 ${collapsed ? 'w-16' : 'w-72'} border-r border-slate-200`}>
+    <div role="complementary" className={`fixed inset-y-0 left-0 z-50 flex transform bg-white/95 transition-[width] duration-200 ${collapsed ? 'w-16' : 'w-72'} border-r border-slate-200`}>
       <div className="flex h-full flex-col justify-between px-3 py-4">
         <div>
           <div className="mb-4 flex items-center justify-between relative">
@@ -53,7 +65,7 @@ export function SiteHeader({ collapsed, onToggleSidebar }: SiteHeaderProps) {
               aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
               aria-expanded={!collapsed}
               onClick={onToggleSidebar}
-              className="absolute right-0 top-0 z-50 rounded-full bg-cream p-2 text-slate-700 shadow-xl ring-2 ring-white"
+              className="absolute right-3 top-3 z-50 rounded-full bg-cream p-2 text-slate-700 shadow-xl ring-2 ring-white"
             >
               {collapsed ? <Menu className="h-4 w-4" /> : <X className="h-4 w-4" />}
             </button>
@@ -63,30 +75,24 @@ export function SiteHeader({ collapsed, onToggleSidebar }: SiteHeaderProps) {
             <div className="mb-4 rounded-3xl border border-slate-200 bg-cream p-3 text-slate-700">
               <label className="block text-xs font-semibold uppercase tracking-[0.28em] text-slate-500 mb-2">{t('search_placeholder')}</label>
               <div className="flex items-center gap-3 rounded-2xl border border-slate-300 bg-white px-3 py-2">
-                <Search className="h-4 w-4 text-olive" />
+                <button
+                  type="button"
+                  aria-label={t('search_placeholder')}
+                  className="inline-flex items-center justify-center"
+                  onClick={() => searchInputRef.current?.focus()}
+                >
+                  <Search className="h-4 w-4 text-olive" />
+                </button>
                 <input
+                  ref={searchInputRef}
                   type="text"
                   value={search}
                   placeholder={t('search_placeholder')}
                   className="w-full border-none bg-transparent p-0 text-sm text-slate-700 outline-none"
                   onChange={(e) => setSearch(e.target.value)}
+                  aria-label={t('search_placeholder')}
                 />
               </div>
-            </div>
-          )}
-
-          {!collapsed && (
-            <div className="mb-4 rounded-3xl border border-slate-200 bg-cream p-3 text-slate-700">
-              <label className="block text-xs font-semibold uppercase tracking-[0.28em] text-slate-500">{t('language')}</label>
-              <select
-                value={lang}
-                onChange={(e) => setLang(e.target.value as any)}
-                className="mt-3 w-full rounded-2xl border border-slate-300 bg-white px-3 py-2 text-sm text-slate-800 outline-none transition focus:border-olive/80"
-              >
-                {languages.map((l) => (
-                  <option key={l.code} value={l.code}>{t(l.code === 'en' ? 'english' : l.code === 'sw' ? 'kiswahili' : l.code === 'fr' ? 'french' : l.code === 'de' ? 'german' : 'spanish')}</option>
-                ))}
-              </select>
             </div>
           )}
 
@@ -108,15 +114,22 @@ export function SiteHeader({ collapsed, onToggleSidebar }: SiteHeaderProps) {
           </nav>
         </div>
 
-        <div className="mt-4">
-          <a
-            href={process.env.NEXT_PUBLIC_PORTAL_URL || 'https://portal.erikenya.org'}
-            className={`inline-flex w-full items-center justify-center gap-2 rounded-full ${collapsed ? 'px-2 py-2' : 'px-4 py-3'} text-sm font-semibold text-white bg-olive`}
-          >
-            <LogIn className="h-4 w-4" />
-            {!collapsed && t('staff_login')}
-          </a>
-        </div>
+        {!collapsed && (
+          <div className="mt-4">
+            <div className="rounded-3xl border border-slate-200 bg-cream p-3 text-slate-700">
+              <label className="block text-xs font-semibold uppercase tracking-[0.28em] text-slate-500">{t('language')}</label>
+              <select
+                value={lang}
+                onChange={(e) => setLang(e.target.value as any)}
+                className="mt-3 w-full rounded-2xl border border-slate-300 bg-white px-3 py-2 text-sm text-slate-800 outline-none transition focus:border-olive/80"
+              >
+                {languages.map((l) => (
+                  <option key={l.code} value={l.code}>{t(l.code === 'en' ? 'english' : l.code === 'sw' ? 'kiswahili' : l.code === 'fr' ? 'french' : l.code === 'de' ? 'german' : 'spanish')}</option>
+                ))}
+              </select>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

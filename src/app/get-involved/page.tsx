@@ -49,7 +49,7 @@ export default function GetInvolvedPage() {
         <div className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
           <h2 className="text-xl font-semibold text-navy">{t('partner_with_us')}</h2>
           <p className="mt-3 text-slate-600">{t('partner_description')}</p>
-          <Link href="/partners" className="mt-5 inline-flex rounded-full border border-slate-300 px-5 py-3 font-semibold text-navy">{t('view_partners')}</Link>
+          <Link href="/contact" className="mt-5 inline-flex rounded-full border border-slate-300 px-5 py-3 font-semibold text-navy">{t('contact')}</Link>
         </div>
       </section>
     </main>

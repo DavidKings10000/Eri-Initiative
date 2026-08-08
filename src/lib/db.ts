@@ -9,6 +9,8 @@ export type BlogPost = {
   title: string;
   excerpt: string;
   content: string;
+  status: string;
+  image: string;
   published_at: string;
 };
 
@@ -29,6 +31,19 @@ export async function getBlogPosts() {
     return rows;
   } catch {
     return [];
+  }
+}
+
+export async function getBlogPostBySlug(slug: string) {
+  if (!sql) {
+    return null;
+  }
+
+  try {
+    const { rows } = await sql<BlogPost>`SELECT * FROM blog_posts WHERE slug = ${slug} LIMIT 1`;
+    return rows[0] ?? null;
+  } catch {
+    return null;
   }
 }
 
