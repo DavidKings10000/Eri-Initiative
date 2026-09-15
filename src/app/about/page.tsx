@@ -13,7 +13,7 @@ type TeamMember = {
 
 type JourneyEntry = {
   year: string;
-  label: string;
+  labelKey: string;
   image: string;
   gallery: Array<{ src: string; title: string; caption: string }>;
 };
@@ -29,61 +29,79 @@ const seniorManagement: TeamMember[] = [
   { name: 'Melissa Wairimu', role: 'Finance & Administration Lead', image: '/Mel.jpeg', bio: 'Melissa leads ERI’s financial and administrative operations, ensuring effective resource management, financial accountability, and compliance. Her commitment to responsible stewardship supports the organization’s sustainable growth and long-term mission.' },
   { name: 'Donald Kiplagat', role: 'Secretary', image: '/Dona.jpeg', bio: 'Donald serves as the Secretary of Eri Street Initiative, ensuring strong documentation, effective organizational coordination, and clear communication across the network of partners, volunteers, and supporters. He plays a key role in maintaining governance, record-keeping, and operational efficiency to support ERI’s mission.' },
   { name: 'Levis Masanta', role: 'Communications & Media Lead', image: '/masanta.jpeg', bio: 'Levis leads ERI’s communications and media efforts, helping tell the organization’s story with clarity and care. Through impactful storytelling and community engagement, he connects ERI’s work with supporters, families, partners, and the wider public, strengthening awareness and inspiring action.' },
-  { name: 'Wacuka Munyiri', role: 'Chief Strategy Officer', image: '/Wacuka.jpg', bio: 'Wacuka leads the organization’s long-term strategic planning, partnership development, and organizational growth. Working closely with the leadership team, they identify opportunities to expand ERI’s impact, strengthen collaborations with government, community, and private sector partners, and ensure that every initiative aligns with the organization’s mission of restoring dignity and empowering street-connected individuals.' },
+  { name: 'Wacuka Munyiri', role: 'Chief Strategy Officer', image: '/wacuka.jpeg', bio: 'Wacuka leads the organization’s long-term strategic planning, partnership development, and organizational growth. Working closely with the leadership team, they identify opportunities to expand ERI’s impact, strengthen collaborations with government, community, and private sector partners, and ensure that every initiative aligns with the organization’s mission of restoring dignity and empowering street-connected individuals.' },
   { name: 'David Munene', role: 'Director of Technology, Innovation & Digital Systems', image: '/David Munene(Edited).png', bio: 'David oversees the organization’s digital platforms, website, and communication systems, helping connect communities, partners, and supporters to ERI’s mission. His passion for technology and innovation drives the development of digital solutions that improve outreach, collaboration, and social impact.' },
 ];
 
-const values = ['Compassion', 'Empowerment', 'Trust', 'Community Development'];
+const values = ['value_compassion', 'value_empowerment', 'value_trust', 'value_community_development'];
 
 const timeline: JourneyEntry[] = [
   {
     year: '2023',
-    label: 'ERI founded',
-    image: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=900&q=80',
+    labelKey: 'timeline_eri_founded',
+    image: '/Images/F1.jpg',
     gallery: [
-      { src: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1200&q=80', title: 'Founding moments', caption: 'The first outreach circles and support teams came together around shared purpose.' },
-      { src: 'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=1200&q=80', title: 'Community listening', caption: 'Early conversations with families and street-connected young people shaped ERI’s approach.' },
-      { src: 'https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?auto=format&fit=crop&w=1200&q=80', title: 'Small beginnings', caption: 'The work started with compassion, practical care, and a belief in second chances.' },
-    ],
+       { src: '/Images/F5.jpg', title: '', caption: '' },
+       { src: '/Images/F4.jpg', title: '', caption: '' },
+       { src: '/Images/F3.jpg', title: '', caption: '' },
+       { src: '/Images/F2.jpg', title: '', caption: '' },
+       { src: '/Images/F1.jpg', title: '', caption: '' },
+  ],
   },
   {
     year: 'Dec 2023',
-    label: 'Thika Food Drive',
-    image: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=900&q=80',
+    labelKey: 'timeline_thika_food_drive',
+    image: '/Images/1.jpg',
     gallery: [
-      { src: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=1200&q=80', title: 'Food drive day', caption: 'Volunteers packed and distributed essential food supplies across Thika.' },
-      { src: 'https://images.unsplash.com/photo-1509099836639-18ba1795216d?auto=format&fit=crop&w=1200&q=80', title: 'Community care', caption: 'Families and neighbors gathered with warmth and practical support.' },
-      { src: 'https://images.unsplash.com/photo-1498837167922-ddd27525d352?auto=format&fit=crop&w=1200&q=80', title: 'Shared meals', caption: 'The drive energized the broader network around dignity and nourishment.' },
+      { src: '/Images/02.jpg', title: '', caption: '' },
+      { src: '/Images/01.jpg', title: '', caption: '' },
+      { src: '/Images/T1.jpg', title: '', caption: '' },
+      { src: '/Images/T2.jpg', title: '', caption: '' },
+      { src: '/Images/T4.jpg', title: '', caption: '' },
+      { src: '/Images/T8.jpg', title: '', caption: '' },
+      { src: '/Images/T9.jpg', title: '', caption: '' },
+      { src: '/Images/T10.jpg', title: '', caption: '' },
+      { src: '/Images/T12.jpg', title: '', caption: '' },
+      { src: '/Images/T17.jpg', title: '', caption: '' },
     ],
   },
   {
     year: 'Mar 2024',
-    label: 'Mombasa Food Drive',
-    image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=900&q=80',
+    labelKey: 'timeline_mombasa_food_drive',
+    image: '/Images/M1.jpg',
     gallery: [
-      { src: 'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1200&q=80', title: 'Mombasa outreach', caption: 'The outreach team reached more families through coordinated local support.' },
-      { src: 'https://images.unsplash.com/photo-1473093295043-cdd812d0e601?auto=format&fit=crop&w=1200&q=80', title: 'Warm welcome', caption: 'Community partners helped create safe spaces for people to be seen and cared for.' },
-      { src: 'https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=1200&q=80', title: 'Hands-on day', caption: 'Every delivery combined practical aid with a reminder that people matter.' },
-    ],
+      { src: '/Images/17.jpg', title: '', caption: '' },
+      { src: '/Images/M2.jpg', title: '', caption: '' },
+      { src: '/Images/M4.jpg', title: '', caption: '' },
+      { src: '/Images/M5.jpg', title: '', caption: '' },
+      { src: '/Images/M7.jpg', title: '', caption: '' },
+      { src: '/Images/M8.jpg', title: '', caption: '' },
+      { src: '/Images/M9.jpg', title: '', caption: '' },
+ ],
   },
   {
     year: 'Dec 2025',
-    label: 'Juja Farm Food Drive',
-    image: 'https://images.unsplash.com/photo-1464226184884-fa280b87c399?auto=format&fit=crop&w=900&q=80',
+    labelKey: 'timeline_juja_farm_food_drive',
+    image: '/Images/7.JPG',
     gallery: [
-      { src: 'https://images.unsplash.com/photo-1464226184884-fa280b87c399?auto=format&fit=crop&w=1200&q=80', title: 'Juja gathering', caption: 'The event brought together volunteers, supporters, and local leaders in one shared mission.' },
-      { src: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=1200&q=80', title: 'Steady support', caption: 'Families received practical help while the team strengthened new links in the community.' },
-      { src: 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80', title: 'Pathways forward', caption: 'The drive reinforced ERI’s commitment to rehabilitation, dignity, and future opportunity.' },
+      { src: '/Images/6.JPG', title: '', caption: '' },
+      { src: '/Images/14.JPG', title: '', caption: '' },
+      { src: '/Images/10.JPG', title: '', caption: '' },
+      { src: '/Images/5.jpg', title: '', caption: '' },
+      { src: '/Images/11.JPG', title: '', caption: '' },
     ],
   },
   {
     year: '2026',
-    label: 'Organizational expansion and onboarding',
-    image: 'https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=900&q=80',
+    labelKey: 'timeline_mlango_kubwa_food_drive',
+    image: '/Images/12.JPG',
     gallery: [
-      { src: 'https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=1200&q=80', title: 'Growing the team', caption: 'New volunteers and partners joined ERI as the network broadened its care and reach.' },
-      { src: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=80', title: 'Planning ahead', caption: 'The team aligned around a stronger and more coordinated future.' },
-      { src: 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1200&q=80', title: 'Shared growth', caption: 'Expansion is supported by training, new community connections, and renewed purpose.' },
+      { src: '/Images/K1.JPG', title: '', caption: '' },
+      { src: '/Images/K2.JPG', title: '', caption: '' },
+      { src: '/Images/K3.JPG', title: '', caption: '' },
+      { src: '/Images/K4.JPG', title: '', caption: '' },
+      { src: '/Images/K5.JPG', title: '', caption: '' },
+      { src: '/Images/K6.JPG', title: '', caption: '' },
     ],
   },
 ];
@@ -166,8 +184,8 @@ export default function AboutPage() {
         <div className="rounded-3xl bg-navy p-8 text-white shadow-sm">
           <h2 className="text-2xl font-semibold">{t('values_title')}</h2>
           <ul className="mt-6 space-y-3 text-sm text-slate-200">
-            {values.map((value) => (
-              <li key={value} className="rounded-2xl bg-white/10 px-4 py-3">{t(`value_${value.toLowerCase()}`)}</li>
+            {values.map((valueKey) => (
+              <li key={valueKey} className="rounded-2xl bg-white/10 px-4 py-3">{t(valueKey)}</li>
             ))}
           </ul>
           <Link href="/get-involved" className="mt-8 inline-flex rounded-full bg-olive px-5 py-3 font-semibold text-white">{t('join_work')}</Link>
@@ -180,13 +198,13 @@ export default function AboutPage() {
           {timeline.map((item) => (
             <button key={item.year} type="button" onClick={() => setSelectedJourney(item)} className="flex w-full flex-col gap-4 rounded-[1.5rem] border border-slate-200 bg-cream p-5 text-left transition-all duration-300 hover:-translate-y-1 hover:shadow-md sm:flex-row sm:items-center sm:justify-between">
               <div className="flex items-center gap-4">
-                <img src={item.image} alt={item.label} className="h-20 w-20 rounded-2xl object-cover" />
+                <img src={item.image} alt={t(item.labelKey)} className="h-20 w-20 rounded-2xl object-cover" />
                 <div>
                   <span className="inline-flex items-center rounded-full bg-olive/10 px-4 py-2 text-sm font-semibold text-olive">{item.year}</span>
-                  <p className="mt-3 text-slate-600">{item.label}</p>
+                  <p className="mt-3 text-slate-600">{t(item.labelKey)}</p>
                 </div>
               </div>
-              <span className="text-sm font-semibold text-navy">Open gallery</span>
+              <span className="text-sm font-semibold text-navy">{t('open_gallery')}</span>
             </button>
           ))}
         </div>
@@ -198,11 +216,11 @@ export default function AboutPage() {
             <div className="flex items-center justify-between gap-3">
               <div>
                 <p className="text-sm font-semibold uppercase tracking-[0.25em] text-olive">{selectedJourney.year}</p>
-                <h3 className="text-2xl font-semibold text-navy">{selectedJourney.label}</h3>
+                <h3 className="text-2xl font-semibold text-navy">{t(selectedJourney.labelKey)}</h3>
               </div>
-              <button type="button" onClick={() => setSelectedJourney(null)} className="rounded-full bg-slate-100 px-4 py-2 text-sm font-semibold text-slate-700">Close</button>
+              <button type="button" onClick={() => setSelectedJourney(null)} className="rounded-full bg-slate-100 px-4 py-2 text-sm font-semibold text-slate-700">{t('close')}</button>
             </div>
-            <div className="mt-6 grid gap-6 lg:grid-cols-[1.25fr_0.75fr]">
+            <div className="mt-6">
               <div className="overflow-hidden rounded-[1.5rem] border border-slate-200 bg-cream p-3">
                 <div className="relative">
                   <img key={selectedJourney.gallery[activePhotoIndex].title} src={selectedJourney.gallery[activePhotoIndex].src} alt={selectedJourney.gallery[activePhotoIndex].title} className="h-[320px] w-full rounded-[1.2rem] object-cover transition-all duration-500 sm:h-[420px]" />
@@ -225,17 +243,6 @@ export default function AboutPage() {
                     <button type="button" onClick={() => setActivePhotoIndex((prev) => (prev + 1) % selectedJourney.gallery.length)} className="rounded-full bg-olive px-3 py-2 text-sm font-semibold text-white">Next</button>
                   </div>
                 </div>
-              </div>
-              <div className="space-y-3">
-                {selectedJourney.gallery.map((photo, index) => (
-                  <button key={photo.title} type="button" onClick={() => setActivePhotoIndex(index)} className={`flex w-full items-center gap-3 rounded-[1.25rem] border p-3 text-left transition-all duration-300 ${activePhotoIndex === index ? 'border-olive bg-olive/10' : 'border-slate-200 bg-white'}`}>
-                    <img src={photo.src} alt={photo.title} className="h-16 w-16 rounded-xl object-cover" />
-                    <div>
-                      <p className="text-sm font-semibold text-navy">{photo.title}</p>
-                      <p className="mt-1 text-sm text-slate-600">{photo.caption}</p>
-                    </div>
-                  </button>
-                ))}
               </div>
             </div>
           </div>

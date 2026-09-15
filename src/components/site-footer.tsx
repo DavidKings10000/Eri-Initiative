@@ -1,7 +1,10 @@
 import Link from 'next/link';
 import { Mail, MapPin, Phone, Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
+import { useLanguage } from '@/context/LanguageProvider';
 
 export function SiteFooter() {
+  const { t } = useLanguage();
+
   return (
     <footer className="bg-[#0f2f3f] text-slate-100">
       <div className="mx-auto flex max-w-7xl flex-col gap-10 px-6 py-16 md:flex-row md:justify-between md:gap-8 lg:px-8">
@@ -18,18 +21,18 @@ export function SiteFooter() {
 
         <div className="grid gap-8 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2">
           <div>
-            <h3 className="mb-4 text-sm font-semibold uppercase tracking-[0.25em] text-slate-300">Explore</h3>
+            <h3 className="mb-4 text-sm font-semibold uppercase tracking-[0.25em] text-slate-300">{t('our_approach')}</h3>
             <div className="space-y-3 text-sm text-slate-200">
-              <Link href="/about" className="block hover:text-white">About</Link>
-              <Link href="/programs" className="block hover:text-white">Programs</Link>
-              <Link href="/impact" className="block hover:text-white">Impact</Link>
-              <Link href="/news" className="block hover:text-white">News</Link>
-              <Link href="/contact" className="block hover:text-white">Contact</Link>
+              <Link href="/about" className="block hover:text-white">{t('about')}</Link>
+              <Link href="/programs" className="block hover:text-white">{t('programs')}</Link>
+              <Link href="/impact" className="block hover:text-white">{t('impact')}</Link>
+              <Link href="/news" className="block hover:text-white">{t('news')}</Link>
+              <Link href="/contact" className="block hover:text-white">{t('contact')}</Link>
             </div>
           </div>
 
           <div>
-            <h3 className="mb-4 text-sm font-semibold uppercase tracking-[0.25em] text-slate-300">Contact Us</h3>
+            <h3 className="mb-4 text-sm font-semibold uppercase tracking-[0.25em] text-slate-300">{t('get_in_touch')}</h3>
             <div className="space-y-3 text-sm text-slate-200">
               <div className="flex items-center gap-3">
                 <Phone className="h-4 w-4 text-olive" />

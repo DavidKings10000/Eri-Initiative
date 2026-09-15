@@ -16,9 +16,9 @@ export default function ContactPage() {
           <div className="mt-8 rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
             <p className="text-sm font-semibold uppercase tracking-[0.25em] text-olive">{t('get_in_touch')}</p>
             <ul className="mt-4 space-y-2 text-slate-700">
-              <li>Email: eriinitiative@gmail.com</li>
-              <li>Phone: +254 728 852 274</li>
-              <li>Location: Nairobi, Kenya</li>
+              <li>{t('email')}: eriinitiative@gmail.com</li>
+              <li>{t('phone')}: +254 728 852 274</li>
+              <li>{t('location')}: Nairobi, Kenya</li>
             </ul>
             <div className="mt-6 flex gap-4">
               <Link href="https://www.instagram.com/eri_initiative?igsh=aHFyYTJqbGRhYTd4" className="text-sm font-semibold text-navy">Instagram</Link>

@@ -2,6 +2,7 @@
 
 import { Compass, Handshake, HeartHandshake, ShieldCheck, Users } from 'lucide-react';
 import { partnerOrganizations } from '@/lib/partnerOrganizations';
+import { useLanguage } from '@/context/LanguageProvider';
 
 const collaborationHighlights = [
   {
@@ -22,12 +23,14 @@ const collaborationHighlights = [
 ];
 
 export default function PartnersPage() {
+  const { t } = useLanguage();
+
   return (
     <main className="mx-auto max-w-7xl px-6 py-16 lg:px-8">
       <section className="max-w-3xl">
-        <p className="text-sm font-semibold uppercase tracking-[0.25em] text-olive">Partners</p>
-        <h1 className="mt-3 text-4xl font-semibold tracking-tight text-navy">Collaboration that strengthens community care</h1>
-        <p className="mt-5 text-lg leading-8 text-slate-700">ERI works through a wide network of partners, faith communities, and frontline volunteers to make outreach more trusted, more responsive, and more sustainable.</p>
+        <p className="text-sm font-semibold uppercase tracking-[0.25em] text-olive">{t('partners_tag')}</p>
+        <h1 className="mt-3 text-4xl font-semibold tracking-tight text-navy">{t('collaboration_strengthens_community_care')}</h1>
+        <p className="mt-5 text-lg leading-8 text-slate-700">{t('partners_intro')}</p>
       </section>
 
       <section className="mt-10 rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
@@ -36,7 +39,7 @@ export default function PartnersPage() {
             <Compass className="h-6 w-6" />
           </div>
           <div>
-            <h2 className="text-2xl font-semibold text-navy">How Street Ambassadors improve partnerships</h2>
+            <h2 className="text-2xl font-semibold text-navy">{t('ambassadors_strengthen_trust')}</h2>
             <p className="mt-3 max-w-3xl text-slate-600">The ERI Street Ambassadors Program gives communities a trusted point of contact while helping partner organizations understand local needs, coordinate referrals, and deliver support in a more organized way.</p>
           </div>
         </div>
@@ -57,7 +60,7 @@ export default function PartnersPage() {
       </section>
 
       <section className="mt-10 rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
-        <h2 className="text-2xl font-semibold text-navy">Faith-based and community partnerships</h2>
+        <h2 className="text-2xl font-semibold text-navy">{t('faith_based_and_community_partnerships')}</h2>
         <p className="mt-4 text-slate-600">ERI’s collaboration with churches, healthcare providers, and neighborhood networks continues to expand the reach of support and strengthen local ownership of rehabilitation and reintegration work.</p>
         <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {partnerOrganizations.map((partner) => (
@@ -80,7 +83,7 @@ export default function PartnersPage() {
             <Users className="h-6 w-6" />
           </div>
           <div>
-            <h2 className="text-2xl font-semibold text-navy">Why these partnerships matter</h2>
+            <h2 className="text-2xl font-semibold text-navy">{t('why_partnerships_matter')}</h2>
             <p className="mt-3 text-slate-600">When communities and partners work together, ERI can respond faster, reduce duplication, and create safer pathways to dignity, education, health, and livelihoods.</p>
           </div>
         </div>

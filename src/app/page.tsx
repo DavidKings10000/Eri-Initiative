@@ -8,18 +8,18 @@ import { partnerOrganizations } from '@/lib/partnerOrganizations';
 
 const values = [
   {
-    title: 'Dignity first',
-    text: 'We meet each person with empathy, respect, and a clear pathway to belonging.',
+    title: 'value_dignity_first',
+    text: 'value_dignity_first_text',
     icon: ShieldCheck,
   },
   {
-    title: 'Community-led care',
-    text: 'Our work is shaped by families, local leaders, and trusted partners in Nairobi and beyond.',
+    title: 'value_community_care',
+    text: 'value_community_care_text',
     icon: Handshake,
   },
   {
-    title: 'Sustainable change',
-    text: 'We connect people to skills, documentation, health care, and safe reintegration support.',
+    title: 'value_sustainable_change',
+    text: 'value_sustainable_change_text',
     icon: Users,
   },
 ];
@@ -30,16 +30,16 @@ export default function HomePage() {
   const [partnerGroup, setPartnerGroup] = useState(0);
   const slides = [
     {
-      title: 'Restoring dignity for street-connected Kenyans',
-      image: 'https://images.unsplash.com/photo-1557683316-973673baf926?auto=format&fit=crop&w=1200&q=80',
+      title: 'hero_restoring_dignity',
+      image: '/Images/12.JPG',
     },
     {
-      title: 'Connecting people to shelter, healthcare, and legal support',
-      image: 'https://images.unsplash.com/photo-1523978591478-c753949ff840?auto=format&fit=crop&w=1200&q=80',
+      title: 'hero_connecting_support',
+      image: '/Images/2.jpg',
     },
     {
-      title: 'Building safer pathways to education and livelihoods',
-      image: 'https://images.unsplash.com/photo-1485217988980-11786ced9454?auto=format&fit=crop&w=1200&q=80',
+      title: 'hero_building_pathways',
+      image: '/Images/1.jpg',
     },
   ];
 
@@ -73,47 +73,47 @@ export default function HomePage() {
 
   const aboutSections = [
     {
-      title: 'The ERI system',
-      text: 'ERI supports street-connected individuals with holistic support, including shelter, medical care, legal identity, counseling, and reintegration planning.',
-      image: 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80',
+      title: 'home_eri_system',
+      text: 'home_eri_system_text',
+      image: '/Images/11.JPG',
       link: '/about',
     },
     {
-      title: 'How we help',
-      text: 'Our programs identify urgent needs, coordinate recovery services, and empower people with the skills and stability needed to rebuild their lives.',
-      image: 'https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d?auto=format&fit=crop&w=1200&q=80',
+      title: 'home_how_help',
+      text: 'home_how_help_text',
+      image: '/Images/10.JPG',
       link: '/programs',
     },
   ];
 
   const workCards = [
     {
-      title: 'Street outreach',
-      text: 'Mobile teams connect directly with individuals on the street to deliver food, hygiene, and referrals to safe spaces.',
-      image: 'https://images.unsplash.com/photo-1544717305-996b815c338c?auto=format&fit=crop&w=800&q=80',
+      title: 'home_street_outreach',
+      text: 'home_street_outreach_text',
+      image: '/Images/6.JPG',
     },
     {
-      title: 'Case management',
-      text: 'Personalized support plans ensure people receive shelter, counseling, health care, and legal documentation.',
-      image: 'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=800&q=80',
+      title: 'home_case_management',
+      text: 'home_case_management_text',
+      image: '/Images/14.JPG',
     },
     {
-      title: 'Skills & reintegration',
-      text: 'Training, education, and livelihood pathways help participants move from crisis to independence.',
-      image: 'https://images.unsplash.com/photo-1498837167922-ddd27525d352?auto=format&fit=crop&w=800&q=80',
+      title: 'home_skills_reintegration',
+      text: 'home_skills_reintegration_text',
+      image: '/Images/15.jpg',
     },
   ];
 
   const flagshipItems = [
     {
-      title: 'Shelter and protection',
-      text: 'A flagship initiative providing safe accommodation and trauma-informed care for people transitioning off the streets.',
-      image: 'https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=1200&q=80',
+      title: 'Supporting shelter and protection agencies',
+      text: 'A flagship initiative providing support for safe accommodation and trauma-informed care for people transitioning off the streets.',
+      image: '/Images/16.jpg',
     },
     {
       title: 'Legal identity access',
       text: 'We support registration, documentation, and the rights that allow people to access services and dignified opportunities.',
-      image: 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80',
+      image: '/Images/17.jpg',
     },
   ];
 
@@ -128,15 +128,15 @@ export default function HomePage() {
   const coastalCards = [
     {
       title: 'Safe living spaces',
-      image: 'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=600&q=80',
+      image: '/Images/16.jpg',
     },
     {
       title: 'Youth empowerment',
-      image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=600&q=80',
+      image: '/Images/18.JPG',
     },
     {
       title: 'Community resilience',
-      image: 'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=600&q=80',
+      image: '/Images/15.jpg',
     },
   ];
 
@@ -168,8 +168,8 @@ export default function HomePage() {
           <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent" />
           <div className="absolute inset-x-0 bottom-6 mx-auto max-w-7xl px-6 lg:px-8">
             <div className="max-w-2xl">
-              <p className="text-sm uppercase tracking-[0.3em] text-cream/80">Highlights</p>
-              <h2 className="mt-2 text-3xl font-semibold text-white sm:text-4xl lg:text-5xl">{slides[slide].title}</h2>
+              <p className="text-sm uppercase tracking-[0.3em] text-cream/80">{t('highlights')}</p>
+              <h2 className="mt-2 text-3xl font-semibold text-white sm:text-4xl lg:text-5xl">{t(slides[slide].title)}</h2>
             </div>
           </div>
         </div>
@@ -180,10 +180,10 @@ export default function HomePage() {
           {aboutSections.map((section) => (
             <div key={section.title} className="grid gap-6 rounded-[2rem] border border-slate-200 bg-white p-8 shadow-sm lg:grid-cols-[1fr_1fr] lg:items-center">
               <div className="space-y-4">
-                <p className="text-sm uppercase tracking-[0.3em] text-olive">{section.title}</p>
-                <p className="text-lg leading-8 text-slate-700">{section.text}</p>
+                <p className="text-sm uppercase tracking-[0.3em] text-olive">{t(section.title)}</p>
+                <p className="text-lg leading-8 text-slate-700">{t(section.text)}</p>
                 <Link href={section.link} className="inline-flex items-center gap-2 text-sm font-semibold text-navy">
-                  Learn more <ArrowRight className="h-4 w-4" />
+                  {t('learn_more_short')} <ArrowRight className="h-4 w-4" />
                 </Link>
               </div>
               <img src={section.image} alt={section.title} className="h-56 w-full rounded-[1.5rem] object-cover lg:h-[260px]" />
@@ -194,16 +194,16 @@ export default function HomePage() {
 
       <section className="mx-auto max-w-7xl px-6 pb-16 lg:px-8">
         <div className="mb-10 text-center">
-          <p className="text-sm uppercase tracking-[0.3em] text-olive">Our work</p>
-          <h2 className="mt-3 text-3xl font-semibold text-navy">Supporting communities with practical action and care</h2>
+          <p className="text-sm uppercase tracking-[0.3em] text-olive">{t('our_work')}</p>
+          <h2 className="mt-3 text-3xl font-semibold text-navy">{t('supporting_communities')}</h2>
         </div>
         <div className="grid gap-6 md:grid-cols-3">
           {workCards.map((card) => (
             <div key={card.title} className="overflow-hidden rounded-[2rem] bg-white shadow-sm">
               <img src={card.image} alt={card.title} className="h-64 w-full object-cover" />
               <div className="space-y-3 p-6">
-                <h3 className="text-xl font-semibold text-navy">{card.title}</h3>
-                <p className="text-sm leading-7 text-slate-600">{card.text}</p>
+                <h3 className="text-xl font-semibold text-navy">{t(card.title)}</h3>
+                <p className="text-sm leading-7 text-slate-600">{t(card.text)}</p>
               </div>
             </div>
           ))}
@@ -212,8 +212,8 @@ export default function HomePage() {
 
       <section className="mx-auto max-w-7xl px-6 py-16 lg:px-8">
         <div className="mb-10 text-center">
-          <p className="text-sm uppercase tracking-[0.3em] text-olive">Featured programs</p>
-          <h2 className="mt-3 text-3xl font-semibold text-navy">Programs that deepen outreach and long-term support</h2>
+          <p className="text-sm uppercase tracking-[0.3em] text-olive">{t('featured_programs')}</p>
+          <h2 className="mt-3 text-3xl font-semibold text-navy">{t('programs_that_deepen_outreach')}</h2>
         </div>
         <div className="grid gap-6 lg:grid-cols-1">
           {featuredPrograms.map((item) => (
@@ -223,7 +223,7 @@ export default function HomePage() {
                   <h3 className="text-2xl font-semibold text-navy">{item.title}</h3>
                   <p className="mt-4 text-lg leading-8 text-slate-700">{item.text}</p>
                 </div>
-                <Link href={item.link} className="inline-flex items-center gap-2 rounded-full bg-olive px-5 py-3 text-sm font-semibold text-white">Learn more <ArrowRight className="h-4 w-4" /></Link>
+                <Link href={item.link} className="inline-flex items-center gap-2 rounded-full bg-olive px-5 py-3 text-sm font-semibold text-white">{t('learn_more_short')} <ArrowRight className="h-4 w-4" /></Link>
               </div>
             </div>
           ))}
@@ -235,7 +235,7 @@ export default function HomePage() {
           {flagshipItems.map((item) => (
             <div key={item.title} className="grid gap-6 rounded-[2rem] border border-slate-200 bg-white p-8 shadow-sm lg:grid-cols-[1fr_1fr] lg:items-center">
               <div className="space-y-4">
-                <p className="text-sm uppercase tracking-[0.3em] text-olive">Flagship initiatives</p>
+                <p className="text-sm uppercase tracking-[0.3em] text-olive">{t('flagship_initiatives')}</p>
                 <h3 className="text-2xl font-semibold text-navy">{item.title}</h3>
                 <p className="text-lg leading-8 text-slate-700">{item.text}</p>
               </div>
@@ -247,8 +247,8 @@ export default function HomePage() {
 
       <section className="mx-auto max-w-7xl px-6 py-16 lg:px-8">
         <div className="mb-10 text-center">
-          <p className="text-sm uppercase tracking-[0.3em] text-olive">Coastal resilience</p>
-          <h2 className="mt-3 text-3xl font-semibold text-navy">Local solutions that protect people and ecosystems</h2>
+          <p className="text-sm uppercase tracking-[0.3em] text-olive">{t('coastal_resilience')}</p>
+          <h2 className="mt-3 text-3xl font-semibold text-navy">{t('local_solutions')}</h2>
         </div>
         <div className="grid gap-6 md:grid-cols-3">
           {coastalCards.map((card) => (

@@ -14,6 +14,7 @@ export default function ThikaFoodDrivePage() {
           <p className="text-lg leading-8 text-slate-700">
             ERI’s Thika Food Drive 2023 brought together community leaders, volunteers, and vulnerable households for a day of practical care, safe distribution, and outreach that identified people needing deeper rehabilitation support.
           </p>
+          <p className="text-sm text-slate-500">Published 23 December 2023 · 10 minute read</p>
 
           <div className="grid gap-6 rounded-3xl border border-slate-200 bg-white p-8 shadow-sm lg:grid-cols-2">
             <div>
@@ -37,13 +38,31 @@ export default function ThikaFoodDrivePage() {
           </section>
 
           <section className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
+            <h2 className="text-2xl font-semibold text-navy">Preparing for a high-need response</h2>
+            <p className="mt-4 text-slate-600">The scale of the drive required more than collecting donations. Organizers had to estimate household needs, plan safe movement, coordinate with local leadership, and prepare volunteers for conversations that might reveal urgent welfare concerns. The involvement of Township Sublocation leaders, assistant chiefs, and Nyumba Kumi representatives helped the team understand the local context before distribution began.</p>
+            <p className="mt-4 text-slate-600">Preparation also made it possible to respond with flexibility. Families do not all have the same number of children, health needs, or access to support. A careful process can keep distribution fair while leaving room for people to explain circumstances that require additional attention.</p>
+          </section>
+
+          <section className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
             <h2 className="text-2xl font-semibold text-navy">Community Engagement</h2>
             <p className="mt-4 text-slate-600">The food drive was coordinated with Township Sublocation leaders, assistant chiefs, and Nyumba Kumi representatives to ensure the response reached the most vulnerable families and strengthened local trust in ERI’s outreach model.</p>
           </section>
 
           <section className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
+            <h2 className="text-2xl font-semibold text-navy">From a package to a pathway</h2>
+            <p className="mt-4 text-slate-600">A care package can relieve pressure for a household, but the outreach conversation helps explain what might happen next. People experiencing homelessness may need support with identity documents, health care, family contact, protection, shelter, education, or livelihoods. Identifying those needs during a food drive gives ERI and its partners a starting point for follow-up.</p>
+            <p className="mt-4 text-slate-600">The transition from immediate relief to rehabilitation should be voluntary and paced around the person’s circumstances. A referral is useful only when it is understandable, accessible, and followed through. This is why the street ambassador network became an important part of the response.</p>
+          </section>
+
+          <section className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
             <h2 className="text-2xl font-semibold text-navy">Distribution of Care Packages</h2>
             <p className="mt-4 text-slate-600">Each care package included food, clothing, sanitary supplies, books and toys, helping families meet immediate needs while creating a safe space for meaningful follow-up conversations.</p>
+          </section>
+
+          <section className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
+            <h2 className="text-2xl font-semibold text-navy">What the numbers do and do not show</h2>
+            <p className="mt-4 text-slate-600">Supporting 92 households and reaching more than 150 people shows the breadth of the response, and exceeding the initial target demonstrates the strength of community participation. The numbers do not, by themselves, show whether a family became safer or whether a person found a lasting pathway out of crisis.</p>
+            <p className="mt-4 text-slate-600">That deeper impact depends on what happened afterward: whether referrals were completed, whether local relationships stayed active, and whether people could access support without stigma. Event reporting should therefore celebrate reach while remaining honest about the longer work still required.</p>
           </section>
 
           <section className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
@@ -117,11 +136,11 @@ export default function ThikaFoodDrivePage() {
           <div className="rounded-3xl border border-slate-200 bg-cream p-8 shadow-sm">
             <h2 className="text-xl font-semibold text-navy">Gallery</h2>
             <div className="mt-6 grid gap-4">
-              <div className="h-40 rounded-3xl bg-slate-100" />
-              <div className="h-40 rounded-3xl bg-slate-100" />
-              <div className="h-40 rounded-3xl bg-slate-100" />
+              {['/Images/1.jpg', '/Images/02.jpg', '/Images/T1.jpg', '/Images/T2.jpg', '/Images/T4.jpg', '/Images/T8.jpg'].map((image) => (
+                <img key={image} src={image} alt="Thika Food Drive community outreach" className="h-40 w-full rounded-3xl object-cover" />
+              ))}
             </div>
-            <p className="mt-4 text-sm text-slate-500">Placeholder cards for future Thika Food Drive images. Replace with real photos when available.</p>
+            <p className="mt-4 text-sm text-slate-500">Images from the Thika Food Drive journey gallery.</p>
           </div>
         </aside>
       </section>

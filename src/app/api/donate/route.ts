@@ -5,6 +5,11 @@ export async function POST(request: Request) {
   try {
     const body = await request.json();
     const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
+    const requestedAmount = Number(body.amount || 1000);
+
+    if (!Number.isFinite(requestedAmount) || requestedAmount < 100) {
+      return NextResponse.json({ error: 'Donation amount must be at least KES 100.' }, { status: 400 });
+    }
 
     if (!process.env.STRIPE_SECRET_KEY || process.env.STRIPE_SECRET_KEY === 'sk_test_placeholder') {
       return NextResponse.json({ url: `${siteUrl}/get-involved?status=mock` });
@@ -17,9 +22,9 @@ export async function POST(request: Request) {
       line_items: [
         {
           price_data: {
-            currency: 'usd',
+            currency: 'kes',
             product_data: { name: 'ERI Street Initiative Donation' },
-            unit_amount: Number(body.amount || 1000),
+            unit_amount: Math.round(requestedAmount),
           },
           quantity: 1,
         },
