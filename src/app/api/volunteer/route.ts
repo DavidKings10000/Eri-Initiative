@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server';
-
-const recipient = 'eriinitiative@gmail.com';
+import { EMAIL_PATTERN, isEmailConfigured, sendToEriInbox } from '@/lib/email';
 
 export async function POST(request: Request) {
   try {
@@ -21,41 +20,31 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Please complete all required fields.' }, { status: 400 });
     }
 
-    if (!/^\S+@\S+\.\S+$/.test(fields.email)) {
+    if (!EMAIL_PATTERN.test(fields.email)) {
       return NextResponse.json({ error: 'Please provide a valid email address.' }, { status: 400 });
     }
 
-    if (!process.env.RESEND_API_KEY || !process.env.RESEND_FROM_EMAIL) {
+    if (!isEmailConfigured()) {
       return NextResponse.json({ error: 'Volunteer applications are not configured yet.' }, { status: 503 });
     }
 
-    const response = await fetch('https://api.resend.com/emails', {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        from: process.env.RESEND_FROM_EMAIL,
-        to: [recipient],
-        reply_to: fields.email,
-        subject: `New ERI volunteer application: ${fields.fullName}`,
-        text: [
-          `Name: ${fields.fullName}`,
-          `Email: ${fields.email}`,
-          `Phone: ${fields.phone}`,
-          `Location: ${fields.location}`,
-          `Preferred date: ${fields.preferredDate}`,
-          `Preferred time: ${fields.preferredTime}`,
-          `Volunteer interests: ${fields.interests}`,
-          `Relevant experience: ${fields.experience || 'Not provided'}`,
-          `Why they want to volunteer: ${fields.motivation}`,
-        ].join('\n\n'),
-      }),
+    const sent = await sendToEriInbox({
+      replyTo: fields.email,
+      subject: `New ERI volunteer application: ${fields.fullName}`,
+      text: [
+        `Name: ${fields.fullName}`,
+        `Email: ${fields.email}`,
+        `Phone: ${fields.phone}`,
+        `Location: ${fields.location}`,
+        `Preferred date: ${fields.preferredDate}`,
+        `Preferred time: ${fields.preferredTime}`,
+        `Volunteer interests: ${fields.interests}`,
+        `Relevant experience: ${fields.experience || 'Not provided'}`,
+        `Why they want to volunteer: ${fields.motivation}`,
+      ].join('\n\n'),
     });
 
-    if (!response.ok) {
-      console.error('Resend volunteer email failed:', await response.text());
+    if (!sent) {
       return NextResponse.json({ error: 'Unable to send your application right now.' }, { status: 502 });
     }
 

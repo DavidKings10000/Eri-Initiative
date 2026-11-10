@@ -1,6 +1,6 @@
 "use client";
 
-import Link from 'next/link';
+import { SiteImage } from '@/components/site-image';
 import { useLanguage } from '@/context/LanguageProvider';
 
 export default function MlangoKubwaPage() {
@@ -112,7 +112,7 @@ export default function MlangoKubwaPage() {
               <p className="mt-4 text-slate-600">A visual record of the people, movement, and shared activities that shaped the outreach day.</p>
               <div className="mt-6 grid gap-4 sm:grid-cols-2">
                 {['/Images/12.JPG', '/Images/K1.JPG', '/Images/K2.JPG', '/Images/K3.JPG', '/Images/K4.JPG', '/Images/K5.JPG', '/Images/K6.JPG'].map((image) => (
-                  <img key={image} src={image} alt="Mlango Kubwa outreach" className="h-52 w-full rounded-2xl object-cover" />
+                  <SiteImage key={image} src={image} alt="Mlango Kubwa outreach" sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw" className="h-52 w-full rounded-2xl object-cover" />
                 ))}
               </div>
             </section>

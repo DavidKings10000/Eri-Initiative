@@ -1,5 +1,6 @@
 "use client";
 
+import { SiteImage } from '@/components/site-image';
 import { useLanguage } from '@/context/LanguageProvider';
 
 export default function ThikaFoodDrivePage() {
@@ -112,7 +113,7 @@ export default function ThikaFoodDrivePage() {
               </div>
               <div className="rounded-3xl bg-cream/10 p-4">
                 <p className="text-sm uppercase tracking-[0.25em] text-olive">Location</p>
-                <p className="mt-2 text-lg font-semibold">Chief's Office, Thika Town</p>
+                <p className="mt-2 text-lg font-semibold">Chief’s Office, Thika Town</p>
               </div>
               <div className="rounded-3xl bg-cream/10 p-4">
                 <p className="text-sm uppercase tracking-[0.25em] text-olive">Households supported</p>
@@ -137,7 +138,7 @@ export default function ThikaFoodDrivePage() {
             <h2 className="text-xl font-semibold text-navy">Gallery</h2>
             <div className="mt-6 grid gap-4">
               {['/Images/1.jpg', '/Images/02.jpg', '/Images/T1.jpg', '/Images/T2.jpg', '/Images/T4.jpg', '/Images/T8.jpg'].map((image) => (
-                <img key={image} src={image} alt="Thika Food Drive community outreach" className="h-40 w-full rounded-3xl object-cover" />
+                <SiteImage key={image} src={image} alt="Thika Food Drive community outreach" sizes="(min-width: 1024px) 30vw, 100vw" className="h-40 w-full rounded-3xl object-cover" />
               ))}
             </div>
             <p className="mt-4 text-sm text-slate-500">Images from the Thika Food Drive journey gallery.</p>

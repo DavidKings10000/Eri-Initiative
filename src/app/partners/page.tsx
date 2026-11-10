@@ -1,5 +1,6 @@
 "use client";
 
+import { SiteImage } from '@/components/site-image';
 import { Compass, Handshake, HeartHandshake, ShieldCheck, Users } from 'lucide-react';
 import { partnerOrganizations } from '@/lib/partnerOrganizations';
 import { useLanguage } from '@/context/LanguageProvider';
@@ -66,7 +67,7 @@ export default function PartnersPage() {
           {partnerOrganizations.map((partner) => (
             <div key={partner.name} className="group flex items-center gap-4 rounded-3xl border border-slate-200 bg-slate-50 p-5 transition hover:border-olive/70 hover:bg-white">
               <div className="flex h-20 w-20 items-center justify-center rounded-3xl bg-slate-100 text-slate-700 mx-auto">
-                {partner.logo ? <img src={partner.logo} alt={`${partner.name} logo`} className="h-16 w-16 object-contain" /> : partner.name.slice(0, 2).toUpperCase()}
+                {partner.logo ? <SiteImage src={partner.logo} alt={`${partner.name} logo`} width={128} height={128} sizes="64px" className="h-16 w-16 object-contain" /> : partner.name.slice(0, 2).toUpperCase()}
               </div>
               <div>
                 <p className="font-semibold text-navy">{partner.name}</p>

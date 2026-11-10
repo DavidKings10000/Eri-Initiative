@@ -1,10 +1,11 @@
 "use client";
 
+import { SiteImage } from '@/components/site-image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { useLanguage } from '@/context/LanguageProvider';
 
-async function getPosts() {
+async function getPosts(): Promise<NewsPost[]> {
   try {
     const response = await fetch('/api/blog');
     return response.ok ? await response.json() : [];
@@ -13,7 +14,18 @@ async function getPosts() {
   }
 }
 
-const fallbackNews = [
+type NewsPost = {
+  slug: string;
+  title: string;
+  date?: string;
+  published_at?: string;
+  excerpt?: string;
+  summary?: string;
+  image?: string;
+  readTime?: string;
+};
+
+const fallbackNews: NewsPost[] = [
   {
     slug: 'our-eyes-on-the-ground-introducing-the-eri-street-ambassadors-program',
     title: 'Our Eyes on the Ground: Introducing the ERI Street Ambassadors Program',
@@ -43,7 +55,8 @@ const fallbackNews = [
     image: '/Images/F3.jpg',
   },
   {
-    slug: 'community-care-network-expands-support-for-vulnerable-families',
+    // No article page exists for this story yet, so the card renders without a "Read more" link.
+    slug: '',
     title: 'Community care network expands support for vulnerable families',
     date: 'September 2, 2026',
     excerpt: 'ERI is strengthening referral pathways between faith groups, local leaders, and service providers to reach families earlier and with more dignity.',
@@ -53,7 +66,7 @@ const fallbackNews = [
 
 export default function NewsPage() {
   const { t } = useLanguage();
-  const [posts, setPosts] = useState<any[]>(fallbackNews);
+  const [posts, setPosts] = useState<NewsPost[]>(fallbackNews);
 
   useEffect(() => {
     getPosts().then((data) => {
@@ -65,9 +78,10 @@ export default function NewsPage() {
     <main className="mx-auto max-w-7xl px-6 py-16 lg:px-8">
       <section className="rounded-3xl overflow-hidden border border-slate-200 shadow-sm">
         <div className="relative h-72 bg-slate-900">
-          <img
+          <SiteImage
             src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1400&q=80"
             alt="News updates"
+            priority
             className="h-full w-full object-cover opacity-80"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-slate-950/80 via-slate-950/40 to-transparent" />
@@ -81,18 +95,20 @@ export default function NewsPage() {
 
       <section className="mt-10 grid gap-6 md:grid-cols-3">
         {posts.map((post) => (
-          <article key={post.slug} className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
-            {post.image ? <img src={post.image} alt={post.title} className="h-52 w-full object-cover" /> : null}
+          <article key={post.slug || post.title} className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
+            {post.image ? <SiteImage src={post.image} alt={post.title} sizes="(min-width: 768px) 33vw, 100vw" className="h-52 w-full object-cover" /> : null}
             <div className="bg-slate-100 px-6 py-4">
-              <p className="text-sm uppercase tracking-[0.25em] text-olive">{post.date}</p>
+              <p className="text-sm uppercase tracking-[0.25em] text-olive">{post.date ?? (post.published_at ? new Date(post.published_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }) : '')}</p>
             </div>
             <div className="p-6">
               <h2 className="text-xl font-semibold text-navy">{post.title}</h2>
               <p className="mt-4 text-sm leading-7 text-slate-600">{post.excerpt || post.summary}</p>
               <p className="mt-3 text-xs font-semibold uppercase tracking-[0.2em] text-olive">{post.readTime || '10 minute read'}</p>
-              <Link href={post.slug ? `/news/${post.slug}` : '/news'} className="mt-6 inline-flex rounded-full bg-olive px-4 py-2 text-sm font-semibold text-white transition hover:bg-olive/90">
+              {post.slug ? (
+              <Link href={`/news/${post.slug}`} className="mt-6 inline-flex rounded-full bg-olive px-4 py-2 text-sm font-semibold text-white transition hover:bg-olive/90">
                 {t('read_more')}
               </Link>
+              ) : null}
             </div>
           </article>
         ))}

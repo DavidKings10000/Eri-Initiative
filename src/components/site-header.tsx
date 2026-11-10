@@ -1,9 +1,11 @@
 "use client";
 
+import { SiteImage } from '@/components/site-image';
 import React, { useMemo, useRef, useState } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { Home, Info, Layers, HeartHandshake, Users, Newspaper, Mail, Search, Menu, X, CalendarDays } from 'lucide-react';
-import { translations, useLanguage } from '@/context/LanguageProvider';
+import { translations, useLanguage, type Lang } from '@/context/LanguageProvider';
 
 const navItems = [
   { href: '/', key: 'home', icon: Home },
@@ -32,6 +34,8 @@ type SiteHeaderProps = {
 export function SiteHeader({ collapsed, onToggleSidebar }: SiteHeaderProps) {
   const { lang, setLang, t } = useLanguage();
   const [search, setSearch] = useState('');
+  const pathname = usePathname();
+  const isActive = (href: string) => (href === '/' ? pathname === '/' : pathname === href || pathname.startsWith(`${href}/`));
 
   const filteredNavItems = useMemo(() => {
     const normalized = search.toLowerCase().trim();
@@ -60,7 +64,7 @@ export function SiteHeader({ collapsed, onToggleSidebar }: SiteHeaderProps) {
       <div className="flex w-full items-center justify-between gap-4 px-4 py-3 sm:px-6 lg:px-8">
         <div className="flex flex-1 items-center justify-start">
           <Link href="/" className="inline-flex items-center gap-3 font-semibold text-navy">
-            <img src="/Logo.png" alt="ERI Street Initiative" className="h-10 w-10 rounded-full object-cover" />
+            <SiteImage src="/Logo.png" alt="ERI Street Initiative" width={80} height={80} sizes="40px" className="h-10 w-10 rounded-full object-cover" />
             <span className="hidden text-lg sm:inline">ERI Street Initiative</span>
           </Link>
         </div>
@@ -68,13 +72,18 @@ export function SiteHeader({ collapsed, onToggleSidebar }: SiteHeaderProps) {
         <div className="flex flex-1 items-center justify-end gap-3">
           <nav aria-label="Primary navigation" className="hidden items-center gap-1 md:flex">
             {filteredNavItems.map((item) => {
-              const Icon = item.icon as any;
+              const Icon = item.icon;
               return (
-                <Link key={item.href} href={item.href} className={navLinkClasses}>
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  aria-current={isActive(item.href) ? 'page' : undefined}
+                  className={`${navLinkClasses} ${isActive(item.href) ? 'text-navy' : ''}`}
+                >
                   <span className="relative flex items-center gap-2 pb-1">
                     <Icon className="h-4 w-4" />
                     <span>{t(item.key)}</span>
-                    <span className="absolute inset-x-0 -bottom-1 h-[3px] origin-left scale-x-0 rounded-full bg-gradient-to-r from-yellow-300 via-amber-400 to-orange-500 shadow-[0_0_12px_rgba(251,191,36,0.9)] transition-transform duration-300 ease-out group-hover:scale-x-100" />
+                    <span className={`absolute inset-x-0 -bottom-1 h-[3px] origin-left rounded-full ${isActive(item.href) ? 'scale-x-100' : 'scale-x-0'} bg-gradient-to-r from-yellow-300 via-amber-400 to-orange-500 shadow-[0_0_12px_rgba(251,191,36,0.9)] transition-transform duration-300 ease-out group-hover:scale-x-100`} />
                   </span>
                 </Link>
               );
@@ -109,7 +118,7 @@ export function SiteHeader({ collapsed, onToggleSidebar }: SiteHeaderProps) {
 
             <select
               value={lang}
-              onChange={(e) => setLang(e.target.value as any)}
+              onChange={(e) => setLang(e.target.value as Lang)}
               aria-label={t('language')}
               className="rounded-full border border-slate-300 bg-white px-3 py-2 text-sm text-slate-800 outline-none transition focus:border-olive/80"
             >
@@ -137,18 +146,21 @@ export function SiteHeader({ collapsed, onToggleSidebar }: SiteHeaderProps) {
         <div className="border-t border-slate-200 bg-white px-4 py-4 md:hidden">
           <nav aria-label="Mobile navigation" className="grid gap-2">
             {filteredNavItems.map((item) => {
-              const Icon = item.icon as any;
+              const Icon = item.icon;
               return (
                 <Link
                   key={item.href}
                   href={item.href}
                   onClick={() => onToggleSidebar()}
-                  className="group relative flex items-center gap-3 rounded-2xl px-3 py-3 text-sm font-medium text-slate-700 transition hover:bg-olive/10 hover:text-navy"
+                  aria-current={isActive(item.href) ? 'page' : undefined}
+                  className={`group relative flex items-center gap-3 rounded-2xl px-3 py-3 text-sm font-medium transition hover:bg-olive/10 hover:text-navy ${
+                    isActive(item.href) ? 'bg-olive/10 text-navy' : 'text-slate-700'
+                  }`}
                 >
                   <span className="relative flex w-full items-center gap-3 pb-1">
                     <Icon className="h-4 w-4" />
                     <span>{t(item.key)}</span>
-                    <span className="absolute inset-x-0 -bottom-1 h-[3px] origin-left scale-x-0 rounded-full bg-gradient-to-r from-yellow-300 via-amber-400 to-orange-500 shadow-[0_0_12px_rgba(251,191,36,0.9)] transition-transform duration-300 ease-out group-hover:scale-x-100" />
+                    <span className={`absolute inset-x-0 -bottom-1 h-[3px] origin-left rounded-full ${isActive(item.href) ? 'scale-x-100' : 'scale-x-0'} bg-gradient-to-r from-yellow-300 via-amber-400 to-orange-500 shadow-[0_0_12px_rgba(251,191,36,0.9)] transition-transform duration-300 ease-out group-hover:scale-x-100`} />
                   </span>
                 </Link>
               );

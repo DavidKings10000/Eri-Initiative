@@ -1,5 +1,6 @@
 "use client";
 
+import { SiteImage } from '@/components/site-image';
 import Link from 'next/link';
 import { ArrowRight, Handshake, ShieldCheck, Users } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageProvider';
@@ -160,11 +161,19 @@ export default function HomePage() {
     <main className="min-h-screen bg-cream text-slate-800">
       <section className="w-full overflow-hidden pt-16">
         <div className="relative h-[420px] sm:h-[580px] w-full">
-          <img
-            src={slides[slide].image}
-            alt={slides[slide].title}
-            className="h-full w-full object-cover"
-          />
+          {slides.map((item, index) => (
+            <SiteImage
+              key={item.image}
+              src={item.image}
+              alt={t(item.title)}
+              sizes="100vw"
+              priority={index === 0}
+              aria-hidden={index !== slide}
+              className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ease-in-out ${
+                index === slide ? 'opacity-100' : 'opacity-0'
+              }`}
+            />
+          ))}
           <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent" />
           <div className="absolute inset-x-0 bottom-6 mx-auto max-w-7xl px-6 lg:px-8">
             <div className="max-w-2xl">
@@ -186,7 +195,7 @@ export default function HomePage() {
                   {t('learn_more_short')} <ArrowRight className="h-4 w-4" />
                 </Link>
               </div>
-              <img src={section.image} alt={section.title} className="h-56 w-full rounded-[1.5rem] object-cover lg:h-[260px]" />
+              <SiteImage src={section.image} alt={t(section.title)} sizes="(min-width: 1024px) 25vw, 100vw" className="h-56 w-full rounded-[1.5rem] object-cover lg:h-[260px]" />
             </div>
           ))}
         </div>
@@ -200,7 +209,7 @@ export default function HomePage() {
         <div className="grid gap-6 md:grid-cols-3">
           {workCards.map((card) => (
             <div key={card.title} className="overflow-hidden rounded-[2rem] bg-white shadow-sm">
-              <img src={card.image} alt={card.title} className="h-64 w-full object-cover" />
+              <SiteImage src={card.image} alt={t(card.title)} sizes="(min-width: 768px) 33vw, 100vw" className="h-64 w-full object-cover" />
               <div className="space-y-3 p-6">
                 <h3 className="text-xl font-semibold text-navy">{t(card.title)}</h3>
                 <p className="text-sm leading-7 text-slate-600">{t(card.text)}</p>
@@ -239,7 +248,7 @@ export default function HomePage() {
                 <h3 className="text-2xl font-semibold text-navy">{item.title}</h3>
                 <p className="text-lg leading-8 text-slate-700">{item.text}</p>
               </div>
-              <img src={item.image} alt={item.title} className="h-80 w-full rounded-[1.5rem] object-cover" />
+              <SiteImage src={item.image} alt={item.title} sizes="(min-width: 1024px) 25vw, 100vw" className="h-80 w-full rounded-[1.5rem] object-cover" />
             </div>
           ))}
         </div>
@@ -253,7 +262,7 @@ export default function HomePage() {
         <div className="grid gap-6 md:grid-cols-3">
           {coastalCards.map((card) => (
             <div key={card.title} className="overflow-hidden rounded-[2rem] bg-white shadow-sm">
-              <img src={card.image} alt={card.title} className="h-64 w-full object-cover" />
+              <SiteImage src={card.image} alt={card.title} sizes="(min-width: 768px) 33vw, 100vw" className="h-64 w-full object-cover" />
               <div className="p-6">
                 <h3 className="text-lg font-semibold text-navy">{card.title}</h3>
               </div>
@@ -276,7 +285,7 @@ export default function HomePage() {
                     {group.map((partner) => (
                       <div key={partner.name} className="rounded-[1.5rem] border border-slate-200 bg-cream p-5 shadow-sm transition-transform duration-300 hover:-translate-y-1">
                         <div className="flex h-20 w-20 items-center justify-center rounded-3xl bg-slate-100 mx-auto">
-                          <img src={partner.logo} alt={`${partner.name} logo`} className="h-16 w-16 object-contain" />
+                          <SiteImage src={partner.logo} alt={`${partner.name} logo`} width={128} height={128} sizes="64px" className="h-16 w-16 object-contain" />
                         </div>
                         <h3 className="mt-4 text-lg font-semibold text-navy text-center">{partner.name}</h3>
                       </div>
@@ -298,8 +307,8 @@ export default function HomePage() {
                 <div className="inline-flex rounded-full bg-cream p-3 text-olive">
                   <Icon className="h-5 w-5" />
                 </div>
-                <h3 className="text-lg font-semibold text-navy">{value.title}</h3>
-                <p className="text-sm leading-7 text-slate-600">{value.text}</p>
+                <h3 className="text-lg font-semibold text-navy">{t(value.title)}</h3>
+                <p className="text-sm leading-7 text-slate-600">{t(value.text)}</p>
               </div>
             );
           })}
