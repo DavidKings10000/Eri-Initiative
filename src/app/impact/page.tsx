@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 
 async function getImpactData() {
   try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/api/impact`, { cache: 'no-store' });
+    const response = await fetch('/api/impact', { cache: 'no-store' });
     return response.ok ? await response.json() : [];
   } catch {
     return [];

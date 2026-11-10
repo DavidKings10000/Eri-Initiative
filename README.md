@@ -9,7 +9,7 @@ The **ERI Website** is a modern platform for Eri Street Initiative that combines
 - Environment variables are managed through Vercel and the `NEXT_PUBLIC_SITE_URL` value is set to the live site domain
 - Volunteer applications are sent to `eriinitiative@gmail.com` through Resend. Configure these Vercel environment variables for Production, Preview, and Development:
 	- `RESEND_API_KEY`: an active Resend API key
-	- `RESEND_FROM_EMAIL`: an email address or sender identity verified in Resend, for example `ERI Street Initiative <no-reply@erikenya.org>`
+	- `RESEND_FROM_EMAIL`: an email address or sender identity verified in Resend, for example `ERI Street Initiative <no-reply@eristreetinitiative.org>`
 
 The volunteer form sends the applicant's name, email, phone, location, preferred date and time, interests, experience, and motivation. Without the Resend variables, the form returns a configuration error instead of implying that the application was delivered.
 

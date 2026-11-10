@@ -4,7 +4,8 @@ import Stripe from 'stripe';
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
+    // Prefer the configured live domain; otherwise return to whichever host the visitor is on.
+    const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || new URL(request.url).origin).replace(/\/+$/, '');
     const requestedAmount = Number(body.amount || 1000);
 
     if (!Number.isFinite(requestedAmount) || requestedAmount < 100) {
