@@ -1,11 +1,12 @@
 import { NextResponse } from 'next/server';
 import Stripe from 'stripe';
+import { configuredSiteUrl } from '@/lib/site';
 
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    // Prefer the configured live domain; otherwise return to whichever host the visitor is on.
-    const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || new URL(request.url).origin).replace(/\/+$/, '');
+    // Prefer the configured live domain; otherwise return donors to whichever host they are on.
+    const siteUrl = configuredSiteUrl() || new URL(request.url).origin;
     const requestedAmount = Number(body.amount || 1000);
 
     if (!Number.isFinite(requestedAmount) || requestedAmount < 100) {
