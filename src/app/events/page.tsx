@@ -1,5 +1,6 @@
 "use client";
 
+import { SiteImage } from '@/components/site-image';
 import Link from 'next/link';
 import { useLanguage } from '@/context/LanguageProvider';
 
@@ -106,9 +107,10 @@ export default function EventsPage() {
     <main className="mx-auto max-w-7xl px-6 py-16 lg:px-8">
       <section className="rounded-3xl overflow-hidden border border-slate-200 shadow-sm">
         <div className="relative h-72 bg-slate-900">
-          <img
+          <SiteImage
             src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1400&q=80"
             alt="Community events"
+            priority
             className="h-full w-full object-cover opacity-80"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-slate-950/80 via-slate-950/40 to-transparent" />
@@ -125,7 +127,7 @@ export default function EventsPage() {
           <div className="mt-6 grid gap-6 md:grid-cols-2">
             {group.items.map((event) => (
               <article key={event.slug} className="overflow-hidden rounded-3xl border border-slate-200 bg-cream shadow-sm">
-                <img src={event.image} alt={event.title} className="h-52 w-full object-cover" />
+                <SiteImage src={event.image} alt={event.title} sizes="(min-width: 768px) 50vw, 100vw" className="h-52 w-full object-cover" />
                 <div className="p-6">
                   <p className="text-sm uppercase tracking-[0.25em] text-olive">{event.date}</p>
                   <h3 className="mt-3 text-xl font-semibold text-navy">{event.title}</h3>

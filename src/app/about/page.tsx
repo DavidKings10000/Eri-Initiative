@@ -1,5 +1,6 @@
 "use client";
 
+import { SiteImage } from '@/components/site-image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { useLanguage } from '@/context/LanguageProvider';
@@ -19,8 +20,8 @@ type JourneyEntry = {
 };
 
 const board: TeamMember[] = [
-  { name: 'Arafat Mukasa', role: 'Board Advisor - Innovation and Business Development', image: 'arafat.jpeg', bio: 'Arafat guides ERI’s innovation pathways, helping young people discover practical opportunities for entrepreneurship, mentorship, and long-term stability.' },
-  { name: 'Rajab (Malenga) Salim', role: 'Board Advisor - Communications and Advocacy', image: 'Rajab.png', bio: 'Rajab is a passionate advocate for communications and social impact, bringing extensive experience in strategic planning and community engagement to the board.' },
+  { name: 'Arafat Mukasa', role: 'Board Advisor - Innovation and Business Development', image: '/arafat.jpeg', bio: 'Arafat guides ERI’s innovation pathways, helping young people discover practical opportunities for entrepreneurship, mentorship, and long-term stability.' },
+  { name: 'Rajab (Malenga) Salim', role: 'Board Advisor - Communications and Advocacy', image: '/Rajab.png', bio: 'Rajab is a passionate advocate for communications and social impact, bringing extensive experience in strategic planning and community engagement to the board.' },
 ];
 
 const seniorManagement: TeamMember[] = [
@@ -122,7 +123,7 @@ function FlipCard({ person }: { person: TeamMember }) {
       <div className="group relative h-full min-h-[380px] [perspective:1000px]">
         <div className={`relative h-full w-full rounded-[1.75rem] border border-slate-200 bg-cream shadow-sm transition-all duration-500 [transform-style:preserve-3d] ${isActive ? '[transform:rotateY(180deg)]' : ''}`}>
           <div className="absolute inset-0 flex h-full flex-col p-5 [backface-visibility:hidden]">
-            <img src={person.image} alt={person.name} className="h-40 w-full rounded-[1.2rem] object-cover sm:h-60" />
+            <SiteImage src={person.image} alt={person.name} sizes="(min-width: 768px) 33vw, 100vw" className="h-40 w-full rounded-[1.2rem] object-cover sm:h-60" />
             <div className="mt-4 flex-1">
               <h3 className="text-lg font-semibold text-navy">{person.name}</h3>
               <p className="mt-1 text-sm font-medium text-olive">{person.role}</p>
@@ -156,8 +157,19 @@ export default function AboutPage() {
 
   useEffect(() => {
     if (!selectedJourney) return;
-    setActivePhotoIndex(0);
+
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setSelectedJourney(null);
+    };
+
+    window.addEventListener('keydown', closeOnEscape);
+    return () => window.removeEventListener('keydown', closeOnEscape);
   }, [selectedJourney]);
+
+  function openJourney(item: JourneyEntry) {
+    setActivePhotoIndex(0);
+    setSelectedJourney(item);
+  }
 
   return (
     <main className="mx-auto max-w-7xl px-6 py-16 lg:px-8">
@@ -196,9 +208,9 @@ export default function AboutPage() {
         <h2 className="text-2xl font-semibold text-navy">Our journey</h2>
         <div className="mt-6 space-y-4">
           {timeline.map((item) => (
-            <button key={item.year} type="button" onClick={() => setSelectedJourney(item)} className="flex w-full flex-col gap-4 rounded-[1.5rem] border border-slate-200 bg-cream p-5 text-left transition-all duration-300 hover:-translate-y-1 hover:shadow-md sm:flex-row sm:items-center sm:justify-between">
+            <button key={item.year} type="button" onClick={() => openJourney(item)} className="flex w-full flex-col gap-4 rounded-[1.5rem] border border-slate-200 bg-cream p-5 text-left transition-all duration-300 hover:-translate-y-1 hover:shadow-md sm:flex-row sm:items-center sm:justify-between">
               <div className="flex items-center gap-4">
-                <img src={item.image} alt={t(item.labelKey)} className="h-20 w-20 rounded-2xl object-cover" />
+                <SiteImage src={item.image} alt={t(item.labelKey)} width={160} height={160} sizes="80px" className="h-20 w-20 rounded-2xl object-cover" />
                 <div>
                   <span className="inline-flex items-center rounded-full bg-olive/10 px-4 py-2 text-sm font-semibold text-olive">{item.year}</span>
                   <p className="mt-3 text-slate-600">{t(item.labelKey)}</p>
@@ -223,7 +235,7 @@ export default function AboutPage() {
             <div className="mt-6">
               <div className="overflow-hidden rounded-[1.5rem] border border-slate-200 bg-cream p-3">
                 <div className="relative">
-                  <img key={selectedJourney.gallery[activePhotoIndex].title} src={selectedJourney.gallery[activePhotoIndex].src} alt={selectedJourney.gallery[activePhotoIndex].title} className="h-[320px] w-full rounded-[1.2rem] object-cover transition-all duration-500 sm:h-[420px]" />
+                  <SiteImage key={selectedJourney.gallery[activePhotoIndex].title} src={selectedJourney.gallery[activePhotoIndex].src} alt={selectedJourney.gallery[activePhotoIndex].title} sizes="(min-width: 1024px) 1000px, 100vw" className="h-[320px] w-full rounded-[1.2rem] object-cover transition-all duration-500 sm:h-[420px]" />
                   <div className="absolute inset-0 flex items-end rounded-[1.2rem] bg-gradient-to-t from-slate-950/65 via-transparent to-transparent p-5">
                     <div>
                       <p className="text-sm font-semibold uppercase tracking-[0.25em] text-cream/80">Journey highlight</p>

@@ -1,5 +1,6 @@
+import { SiteImage } from '@/components/site-image';
 import Link from 'next/link';
-import { Mail, MapPin, Phone, Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
+import { Mail, MapPin, Phone, Facebook, Instagram } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageProvider';
 
 export function SiteFooter() {
@@ -10,7 +11,7 @@ export function SiteFooter() {
       <div className="mx-auto flex max-w-7xl flex-col gap-10 px-6 py-16 md:flex-row md:justify-between md:gap-8 lg:px-8">
         <div className="max-w-md space-y-4">
           <Link href="/" className="flex items-center gap-3 text-lg font-semibold text-white">
-            <img src="/Logo.png" alt="ERI Street Initiative" className="h-10 w-10 rounded-full object-cover" />
+            <SiteImage src="/Logo.png" alt="ERI Street Initiative" width={80} height={80} sizes="40px" className="h-10 w-10 rounded-full object-cover" />
             ERI Street Initiative
           </Link>
           <p className="text-sm leading-7 text-slate-300">
@@ -34,35 +35,34 @@ export function SiteFooter() {
           <div>
             <h3 className="mb-4 text-sm font-semibold uppercase tracking-[0.25em] text-slate-300">{t('get_in_touch')}</h3>
             <div className="space-y-3 text-sm text-slate-200">
-              <div className="flex items-center gap-3">
+              <a href="tel:+254728852274" className="flex items-center gap-3 hover:text-white">
                 <Phone className="h-4 w-4 text-olive" />
                 <span>+254 728 852 274</span>
-              </div>
+              </a>
               <div className="flex items-center gap-3">
                 <MapPin className="h-4 w-4 text-olive" />
                 <span>Nairobi, Kenya</span>
               </div>
-              <div className="flex items-center gap-3">
+              <a href="mailto:eriinitiative@gmail.com" className="flex items-center gap-3 hover:text-white">
                 <Mail className="h-4 w-4 text-olive" />
                 <span>eriinitiative@gmail.com</span>
-              </div>
+              </a>
             </div>
             <div className="mt-6 flex items-center gap-3">
-              <a href="https://www.facebook.com/profile.php?id=61573327822338" aria-label="Facebook" className="rounded-full bg-white/10 p-2 text-white transition hover:bg-white/20">
+              <a href="https://www.facebook.com/profile.php?id=61573327822338" aria-label="Facebook" target="_blank" rel="noopener noreferrer" className="rounded-full bg-white/10 p-2 text-white transition hover:bg-white/20">
                 <Facebook className="h-4 w-4" />
               </a>
-              <a href="#" aria-label="Twitter" className="rounded-full bg-white/10 p-2 text-white transition hover:bg-white/20">
-                <Twitter className="h-4 w-4" />
-              </a>
-              <a href="#" aria-label="LinkedIn" className="rounded-full bg-white/10 p-2 text-white transition hover:bg-white/20">
-                <Linkedin className="h-4 w-4" />
-              </a>
-              <a href="https://www.instagram.com/eri_initiative?igsh=aHFyYTJqbGRhYTd4" aria-label="Instagram" className="rounded-full bg-white/10 p-2 text-white transition hover:bg-white/20">
+              <a href="https://www.instagram.com/eri_initiative?igsh=aHFyYTJqbGRhYTd4" aria-label="Instagram" target="_blank" rel="noopener noreferrer" className="rounded-full bg-white/10 p-2 text-white transition hover:bg-white/20">
                 <Instagram className="h-4 w-4" />
               </a>
             </div>
           </div>
         </div>
+      </div>
+      <div className="border-t border-white/10">
+        <p className="mx-auto max-w-7xl px-6 py-6 text-xs text-slate-400 lg:px-8">
+          © {new Date().getFullYear()} ERI Street Initiative. All rights reserved.
+        </p>
       </div>
     </footer>
   );

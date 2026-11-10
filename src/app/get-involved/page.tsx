@@ -28,6 +28,8 @@ export default function GetInvolvedPage() {
     if (typeof window === 'undefined') return;
 
     const params = new URLSearchParams(window.location.search);
+    // Read the Stripe redirect status once on mount (window is unavailable during server render).
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setQueryStatus(params.get('status'));
   }, []);
 

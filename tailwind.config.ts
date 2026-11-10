@@ -10,7 +10,7 @@ export default {
         cream: '#F7F4EC',
       },
       fontFamily: {
-        sans: ['Inter', 'sans-serif'],
+        sans: ['var(--font-inter)', 'Inter', 'system-ui', 'sans-serif'],
       },
     },
   },

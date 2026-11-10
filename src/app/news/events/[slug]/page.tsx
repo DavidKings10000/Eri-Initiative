@@ -1,3 +1,4 @@
+import { SiteImage } from '@/components/site-image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
@@ -68,7 +69,7 @@ export default async function EventStoryPage({ params }: { params: Promise<{ slu
         <p className="text-sm font-semibold uppercase tracking-[0.25em] text-olive">News</p>
         <h1 className="mt-3 text-4xl font-semibold tracking-tight text-navy">{story.title}</h1>
         <p className="mt-4 text-sm text-slate-500">Published {story.date} · 10 minute read · {story.location}</p>
-        <img src={story.image} alt={story.title} className="mt-8 h-80 w-full rounded-3xl object-cover" />
+        <SiteImage src={story.image} alt={story.title} sizes="(min-width: 1024px) 960px, 100vw" priority className="mt-8 h-80 w-full rounded-3xl object-cover" />
         <p className="mt-8 text-lg leading-8 text-slate-700">{story.summary}</p>
         <div className="mt-10 space-y-8">
           {story.sections.map(([heading, body]) => (
@@ -81,7 +82,7 @@ export default async function EventStoryPage({ params }: { params: Promise<{ slu
         <section className="mt-10 rounded-3xl border border-slate-200 bg-cream p-6">
           <h2 className="text-xl font-semibold text-navy">Gallery</h2>
           <div className="mt-5 grid gap-4 sm:grid-cols-2">
-            {story.gallery.map((image) => <img key={image} src={image} alt={`${story.title} community work`} className="h-52 w-full rounded-2xl object-cover" />)}
+            {story.gallery.map((image) => <SiteImage key={image} src={image} alt={`${story.title} community work`} sizes="(min-width: 640px) 480px, 100vw" className="h-52 w-full rounded-2xl object-cover" />)}
           </div>
         </section>
         <Link href="/events" className="mt-8 inline-flex rounded-full bg-olive px-5 py-3 font-semibold text-white">Back to events</Link>

@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext, useEffect, useState } from "react";
 
-type Lang = "en" | "sw" | "fr" | "de" | "es";
+export type Lang = "en" | "sw" | "fr" | "de" | "es";
 
 type LangContext = {
   lang: Lang;
@@ -594,6 +594,8 @@ const supplementalTranslations: Record<Lang, Record<string, string>> = {
     motivation_placeholder: "Why would you like to volunteer?",
     submit_application: "Submit application",
     sending: "Sending...",
+    contact_success: "Thank you. Your message has been sent to ERI.",
+    contact_error: "We could not send your message. Please try again or email eriinitiative@gmail.com.",
     volunteer_success: "Thank you. Your volunteer application has been sent to ERI.",
     volunteer_error: "We could not send your application. Please try again or email eriinitiative@gmail.com.",
     value_dignity_first: "Dignity first",
@@ -643,6 +645,8 @@ const supplementalTranslations: Record<Lang, Record<string, string>> = {
     motivation_placeholder: "Kwa nini ungependa kujitolea?",
     submit_application: "Tuma ombi",
     sending: "Inatumwa...",
+    contact_success: "Asante. Ujumbe wako umetumwa kwa ERI.",
+    contact_error: "Hatukuweza kutuma ujumbe wako. Tafadhali jaribu tena au tuma barua pepe kwa eriinitiative@gmail.com.",
     volunteer_success: "Asante. Ombi lako la kujitolea limetumwa kwa ERI.",
     volunteer_error: "Hatukuweza kutuma ombi lako. Jaribu tena au tuma barua pepe kwa eriinitiative@gmail.com.",
     value_dignity_first: "Heshima kwanza",
@@ -692,6 +696,8 @@ const supplementalTranslations: Record<Lang, Record<string, string>> = {
     motivation_placeholder: "Pourquoi souhaitez-vous être bénévole ?",
     submit_application: "Envoyer la candidature",
     sending: "Envoi...",
+    contact_success: "Merci. Votre message a été envoyé à ERI.",
+    contact_error: "Nous n'avons pas pu envoyer votre message. Réessayez ou écrivez à eriinitiative@gmail.com.",
     volunteer_success: "Merci. Votre candidature bénévole a été envoyée à ERI.",
     volunteer_error: "Nous n'avons pas pu envoyer votre candidature. Réessayez ou écrivez à eriinitiative@gmail.com.",
     phone: "Téléphone",
@@ -722,6 +728,8 @@ const supplementalTranslations: Record<Lang, Record<string, string>> = {
     motivation_placeholder: "Warum möchten Sie sich engagieren?",
     submit_application: "Bewerbung senden",
     sending: "Wird gesendet...",
+    contact_success: "Danke. Ihre Nachricht wurde an ERI gesendet.",
+    contact_error: "Ihre Nachricht konnte nicht gesendet werden. Versuchen Sie es erneut oder schreiben Sie an eriinitiative@gmail.com.",
     volunteer_success: "Danke. Ihre Bewerbung wurde an ERI gesendet.",
     volunteer_error: "Ihre Bewerbung konnte nicht gesendet werden. Versuchen Sie es erneut oder schreiben Sie an eriinitiative@gmail.com.",
     phone: "Telefon",
@@ -752,6 +760,8 @@ const supplementalTranslations: Record<Lang, Record<string, string>> = {
     motivation_placeholder: "¿Por qué te gustaría ser voluntario?",
     submit_application: "Enviar solicitud",
     sending: "Enviando...",
+    contact_success: "Gracias. Tu mensaje se envió a ERI.",
+    contact_error: "No pudimos enviar tu mensaje. Inténtalo de nuevo o escribe a eriinitiative@gmail.com.",
     volunteer_success: "Gracias. Tu solicitud de voluntariado se envió a ERI.",
     volunteer_error: "No pudimos enviar tu solicitud. Inténtalo de nuevo o escribe a eriinitiative@gmail.com.",
     phone: "Teléfono",
@@ -769,17 +779,32 @@ const supplementalTranslations: Record<Lang, Record<string, string>> = {
 const LanguageContext = createContext<LangContext | undefined>(undefined);
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  const [lang, setLangState] = useState<Lang>(() => {
-    if (typeof window === "undefined") return "en";
-    return (localStorage.getItem("eri_lang") as Lang) || "en";
-  });
+  // Always start in English so the server-rendered HTML matches the first client
+  // render, then restore the visitor's saved language after hydration.
+  const [lang, setLangState] = useState<Lang>("en");
 
   useEffect(() => {
-    localStorage.setItem("eri_lang", lang);
+    try {
+      const saved = localStorage.getItem("eri_lang");
+      // One-time restore after hydration; reading storage during render would mismatch the server HTML.
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      if (saved && saved in translations) setLangState(saved as Lang);
+    } catch {
+      // Storage can be unavailable (private mode, blocked cookies); stay on English.
+    }
+  }, []);
+
+  useEffect(() => {
+    document.documentElement.lang = lang;
   }, [lang]);
 
   function setLang(l: Lang) {
     setLangState(l);
+    try {
+      localStorage.setItem("eri_lang", l);
+    } catch {
+      // Ignore storage failures; the choice still applies for this visit.
+    }
   }
 
   function t(key: string) {
