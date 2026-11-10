@@ -2,11 +2,15 @@
 The **ERI Website** is a modern platform for Eri Street Initiative that combines a public website with a secure case management portal. It showcases ERI's mission, programs, impact, and donation opportunities while enabling authorized staff to securely manage and track rehabilitation cases through the organization's five-stage reintegration process.
 
 ## Live Site
-- Public site: https://eristreetinitiative.org
+- Currently served at the project's Vercel address (`*.vercel.app`, shown in the Vercel dashboard).
+- Planned custom domain: https://eristreetinitiative.org (not registered yet). To switch over:
+  1. Register the domain and add it under Vercel → Project → Settings → Domains.
+  2. Set `NEXT_PUBLIC_SITE_URL=https://eristreetinitiative.org` in Vercel environment variables and redeploy.
+  Until then the sitemap, social previews and donation redirects use the Vercel address automatically.
 
 ## Deployment
 - Hosted on Vercel with configuration in `vercel.json`
-- Environment variables are managed through Vercel and the `NEXT_PUBLIC_SITE_URL` value is set to the live site domain
+- Environment variables are managed in the Vercel dashboard. `NEXT_PUBLIC_SITE_URL` is optional: when unset, the site uses its Vercel production address (see `src/lib/site.ts`)
 - Volunteer applications are sent to `eriinitiative@gmail.com` through Resend. Configure these Vercel environment variables for Production, Preview, and Development:
 	- `RESEND_API_KEY`: an active Resend API key
 	- `RESEND_FROM_EMAIL`: an email address or sender identity verified in Resend, for example `ERI Street Initiative <no-reply@eristreetinitiative.org>`
